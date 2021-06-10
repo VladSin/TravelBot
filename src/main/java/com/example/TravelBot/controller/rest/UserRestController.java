@@ -5,6 +5,9 @@ import com.example.TravelBot.dto.response.UserResponseDto;
 import com.example.TravelBot.entity.UserEntity;
 import com.example.TravelBot.entity.util.RolesEnum;
 import com.example.TravelBot.service.UserService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +27,9 @@ public class UserRestController {
     }
 
     @PostMapping(value = "save")
+    @ApiOperation(value = "Save User", response = UserResponseDto.class, tags = "saveUser")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK")})
     public ResponseEntity<UserResponseDto> saveUser(@RequestBody UserRequestDto request) {
         UserEntity user = new UserEntity();
         user.setUsername(request.getUsername());
@@ -36,6 +42,10 @@ public class UserRestController {
     }
 
     @GetMapping(value = "get/{id}")
+    @ApiOperation(value = "Get User by Id", response = UserResponseDto.class, tags = "getUserById")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 204, message = "NO_CONTENT")})
     public ResponseEntity<UserResponseDto> getUserById(@PathVariable(name = "id") Long id) {
         UserEntity user = userService.findById(id);
         if (user == null) {
@@ -46,6 +56,10 @@ public class UserRestController {
     }
 
     @GetMapping(value = "get/username/{username}")
+    @ApiOperation(value = "Get User by Username", response = UserResponseDto.class, tags = "getUserByUsername")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 204, message = "NO_CONTENT")})
     public ResponseEntity<UserResponseDto> getUserByUsername(@PathVariable(name = "username") String username) {
         UserEntity user = userService.findByUsername(username);
         if (user == null) {
@@ -56,6 +70,10 @@ public class UserRestController {
     }
 
     @GetMapping(value = "get/email/{email}")
+    @ApiOperation(value = "Get User by Email", response = UserResponseDto.class, tags = "getUserByEmail")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 204, message = "NO_CONTENT")})
     public ResponseEntity<UserResponseDto> getUserByEmail(@PathVariable(name = "email") String email) {
         UserEntity user = userService.findByEmail(email);
         if (user == null) {
@@ -71,12 +89,16 @@ public class UserRestController {
     }
 
     @PatchMapping(value = "update/name/{id}")
+    @ApiOperation(value = "Update Name", response = UserResponseDto.class, tags = "updateUserName")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 204, message = "NO_CONTENT")})
     public ResponseEntity<UserResponseDto> updateUserName(
             @PathVariable("id") Long id,
             @RequestBody UserRequestDto request) {
 
         if (userService.findById(id) == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         userService.updateUsername(id, request.getUsername());
 
         UserEntity updatedUser = userService.findById(id);
@@ -85,12 +107,16 @@ public class UserRestController {
     }
 
     @PatchMapping(value = "update/password/{id}")
+    @ApiOperation(value = "Update Password", response = UserResponseDto.class, tags = "updateUserPassword")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 204, message = "NO_CONTENT")})
     public ResponseEntity<UserResponseDto> updateUserPassword(
             @PathVariable("id") Long id,
             @RequestBody UserRequestDto request) {
 
         if (userService.findById(id) == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         userService.updatePassword(id, request.getPassword());
 
         UserEntity updatedUser = userService.findById(id);
@@ -99,12 +125,16 @@ public class UserRestController {
     }
 
     @PatchMapping(value = "update/email/{id}")
+    @ApiOperation(value = "Update Email", response = UserResponseDto.class, tags = "updateUserName")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 204, message = "NO_CONTENT")})
     public ResponseEntity<UserResponseDto> updateUserEmail(
             @PathVariable("id") Long id,
             @RequestBody UserRequestDto request) {
 
         if (userService.findById(id) == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         userService.updateEmail(id, request.getEmail());
 
         UserEntity updatedUser = userService.findById(id);
@@ -114,6 +144,9 @@ public class UserRestController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "delete/{id}")
+    @ApiOperation(value = "Delete User", tags = "deleteUser")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK")})
     public void deleteUser(@PathVariable("id") Long id) {
         userService.delete(id);
     }

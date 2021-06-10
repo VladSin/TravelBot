@@ -4,6 +4,9 @@ import com.example.TravelBot.dto.request.CityRequestDto;
 import com.example.TravelBot.dto.response.CityResponseDto;
 import com.example.TravelBot.entity.CityEntity;
 import com.example.TravelBot.service.CityService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +26,9 @@ public class CityRestController {
     }
 
     @PostMapping(value = "save")
+    @ApiOperation(value = "Save City", response = CityResponseDto.class, tags = "saveCity")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK")})
     public ResponseEntity<CityResponseDto> saveCity(@RequestBody CityRequestDto request) {
         CityEntity city = new CityEntity();
         city.setName(request.getName());
@@ -34,6 +40,10 @@ public class CityRestController {
     }
 
     @GetMapping(value = "get/{id}")
+    @ApiOperation(value = "Get City by Id", response = CityResponseDto.class, tags = "getCityById")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 204, message = "NO_CONTENT")})
     public ResponseEntity<CityResponseDto> getCityById(@PathVariable(name = "id") Long id) {
         CityEntity city = cityService.findById(id);
         if (city == null) {
@@ -44,6 +54,10 @@ public class CityRestController {
     }
 
     @GetMapping(value = "get/name/{name}")
+    @ApiOperation(value = "Get City by Name", response = CityResponseDto.class, tags = "getCityByName")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 204, message = "NO_CONTENT")})
     public ResponseEntity<CityResponseDto> getCityByName(@PathVariable(name = "name") String name) {
         CityEntity city = cityService.findByName(name);
         if (city == null) {
@@ -59,12 +73,16 @@ public class CityRestController {
     }
 
     @PatchMapping(value = "update/name/{id}")
+    @ApiOperation(value = "Update City", response = CityResponseDto.class, tags = "updateCityName")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 204, message = "NO_CONTENT")})
     public ResponseEntity<CityResponseDto> updateCityName(
             @PathVariable("id") Long id,
             @RequestBody CityRequestDto request) {
 
         if (cityService.findById(id) == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         cityService.updateName(id, request.getName());
 
         CityEntity updatedCity = cityService.findById(id);
@@ -73,12 +91,15 @@ public class CityRestController {
     }
 
     @PatchMapping(value = "update/info/{id}")
+    @ApiOperation(value = "Update Info", response = CityResponseDto.class, tags = "updateCityInformation")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 204, message = "NO_CONTENT")})
     public ResponseEntity<CityResponseDto> updateCityInformation(
             @PathVariable("id") Long id,
             @RequestBody CityRequestDto request) {
-
         if (cityService.findById(id) == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         cityService.updateInfo(id, request.getInfo());
 
         CityEntity updatedCity = cityService.findById(id);
@@ -88,6 +109,9 @@ public class CityRestController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "delete/{id}")
+    @ApiOperation(value = "Delete City", tags = "deleteCity")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK")})
     public void deleteCity(@PathVariable("id") Long id) {
         cityService.delete(id);
     }
