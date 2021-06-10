@@ -72,7 +72,7 @@ public class CityRestController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @PatchMapping(value = "update/info/{id}/")
+    @PatchMapping(value = "update/info/{id}")
     public ResponseEntity<CityResponseDto> updateCityInformation(
             @PathVariable("id") Long id,
             @RequestBody CityRequestDto request) {
