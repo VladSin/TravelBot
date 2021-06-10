@@ -73,11 +73,11 @@ public class UserRestController {
     @PatchMapping(value = "/update/name/{id}")
     public ResponseEntity<UserResponseDto> updateUserName(
             @PathVariable("id") Long id,
-            @RequestBody String name) {
+            @RequestBody UserRequestDto request) {
 
         if (userService.findById(id) == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        userService.updateUsername(id, name);
+        userService.updateUsername(id, request.getUsername());
 
         UserEntity updatedUser = userService.findById(id);
         UserResponseDto result = new UserResponseDto(id, updatedUser.getUsername(), updatedUser.getEmail());
@@ -87,11 +87,11 @@ public class UserRestController {
     @PatchMapping(value = "/update/password/{id}")
     public ResponseEntity<UserResponseDto> updateUserPassword(
             @PathVariable("id") Long id,
-            @RequestBody String password) {
+            @RequestBody UserRequestDto request) {
 
         if (userService.findById(id) == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        userService.updatePassword(id, password);
+        userService.updatePassword(id, request.getPassword());
 
         UserEntity updatedUser = userService.findById(id);
         UserResponseDto result = new UserResponseDto(id, updatedUser.getUsername(), updatedUser.getEmail());
@@ -101,11 +101,11 @@ public class UserRestController {
     @PatchMapping(value = "/update/email/{id}")
     public ResponseEntity<UserResponseDto> updateUserEmail(
             @PathVariable("id") Long id,
-            @RequestBody String email) {
+            @RequestBody UserRequestDto request) {
 
         if (userService.findById(id) == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        userService.updateEmail(id, email);
+        userService.updateEmail(id, request.getEmail());
 
         UserEntity updatedUser = userService.findById(id);
         UserResponseDto result = new UserResponseDto(id, updatedUser.getUsername(), updatedUser.getEmail());
