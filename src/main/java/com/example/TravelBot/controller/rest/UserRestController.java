@@ -30,7 +30,7 @@ public class UserRestController {
         user.setPassword(request.getPassword());
         user.setEmail(request.getEmail());
 
-        UserEntity savedUser = userService.save(user, RolesEnum.valueOf(request.getRole()));
+        UserEntity savedUser = userService.save(user, RolesEnum.ADMIN);
         UserResponseDto result = new UserResponseDto(savedUser.getId(), savedUser.getUsername(), savedUser.getEmail());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
