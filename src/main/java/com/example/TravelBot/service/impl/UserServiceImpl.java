@@ -28,10 +28,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity save(UserEntity user, RolesEnum role) {
-        List<Role> userRoles = new ArrayList<>();
-        Role roleUser = roleRepository.findByRole(String.valueOf(role));
-        userRoles.add(roleUser);
-        user.setRoles(userRoles);
+        // TODO
+//        List<Role> userRoles = new ArrayList<>();
+//        Role roleUser = roleRepository.findByRole(String.valueOf(role));
+//        userRoles.add(roleUser);
+//        user.setRoles(userRoles);
 
         UserEntity savedUser = userRepository.save(user);
         log.info("IN saved - user: {} successfully registered", savedUser);
