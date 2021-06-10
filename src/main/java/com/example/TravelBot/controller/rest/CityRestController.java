@@ -58,14 +58,14 @@ public class CityRestController {
         return new ResponseEntity<>(cityService.getAll(), HttpStatus.OK);
     }
 
-    @PatchMapping(value = "update/name/{id}/{name}")
+    @PatchMapping(value = "update/name/{id}")
     public ResponseEntity<CityResponseDto> updateCityName(
             @PathVariable("id") Long id,
-            @PathVariable("name") String name) {
+            @RequestBody CityRequestDto request) {
 
         if (cityService.findById(id) == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        cityService.updateName(id, name);
+        cityService.updateName(id, request.getName());
 
         CityEntity updatedCity = cityService.findById(id);
         CityResponseDto result = new CityResponseDto(updatedCity.getId(), updatedCity.getName(), updatedCity.getInfo());
@@ -75,11 +75,11 @@ public class CityRestController {
     @PatchMapping(value = "update/info/{id}/")
     public ResponseEntity<CityResponseDto> updateCityInformation(
             @PathVariable("id") Long id,
-            @RequestBody String info) {
+            @RequestBody CityRequestDto request) {
 
         if (cityService.findById(id) == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        cityService.updateInfo(id, info);
+        cityService.updateInfo(id, request.getInfo());
 
         CityEntity updatedCity = cityService.findById(id);
         CityResponseDto result = new CityResponseDto(updatedCity.getId(), updatedCity.getName(), updatedCity.getInfo());
