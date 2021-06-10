@@ -1,4 +1,4 @@
-package com.example.TravelBot.entity.unil;
+package com.example.TravelBot.entity.util;
 
 public enum RolesEnum {
     UNAUTHORIZED,

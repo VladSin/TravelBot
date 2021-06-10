@@ -1,7 +1,7 @@
 package com.example.TravelBot.controller.rest;
 
 import com.example.TravelBot.entity.Role;
-import com.example.TravelBot.entity.unil.RolesEnum;
+import com.example.TravelBot.entity.util.RolesEnum;
 import com.example.TravelBot.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

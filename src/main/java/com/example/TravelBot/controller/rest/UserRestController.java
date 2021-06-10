@@ -3,7 +3,7 @@ package com.example.TravelBot.controller.rest;
 import com.example.TravelBot.dto.request.UserRequestDto;
 import com.example.TravelBot.dto.response.UserResponseDto;
 import com.example.TravelBot.entity.UserEntity;
-import com.example.TravelBot.entity.unil.RolesEnum;
+import com.example.TravelBot.entity.util.RolesEnum;
 import com.example.TravelBot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

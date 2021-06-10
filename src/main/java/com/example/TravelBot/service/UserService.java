@@ -1,7 +1,7 @@
 package com.example.TravelBot.service;
 
 import com.example.TravelBot.entity.UserEntity;
-import com.example.TravelBot.entity.unil.RolesEnum;
+import com.example.TravelBot.entity.util.RolesEnum;
 
 import java.util.List;
 

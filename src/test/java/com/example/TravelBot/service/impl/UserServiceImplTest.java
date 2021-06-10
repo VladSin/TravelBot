@@ -1,7 +1,7 @@
 package com.example.TravelBot.service.impl;
 
 import com.example.TravelBot.entity.UserEntity;
-import com.example.TravelBot.entity.unil.RolesEnum;
+import com.example.TravelBot.entity.util.RolesEnum;
 import com.example.TravelBot.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

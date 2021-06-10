@@ -2,7 +2,7 @@ package com.example.TravelBot.service.impl;
 
 import com.example.TravelBot.entity.Role;
 import com.example.TravelBot.entity.UserEntity;
-import com.example.TravelBot.entity.unil.RolesEnum;
+import com.example.TravelBot.entity.util.RolesEnum;
 import com.example.TravelBot.repository.RoleRepository;
 import com.example.TravelBot.repository.UserRepository;
 import com.example.TravelBot.service.UserService;
@@ -29,7 +29,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity save(UserEntity user, RolesEnum role) {
         List<Role> userRoles = new ArrayList<>();
-        userRoles.add(roleRepository.findByRole(String.valueOf(role)));
+        Role roleUser = roleRepository.findByRole(String.valueOf(role));
+        userRoles.add(roleUser);
         user.setRoles(userRoles);
 
         UserEntity savedUser = userRepository.save(user);

@@ -1,6 +1,7 @@
 package com.example.TravelBot.service.impl;
 
 import com.example.TravelBot.entity.Role;
+import com.example.TravelBot.entity.util.RolesEnum;
 import com.example.TravelBot.repository.RoleRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,15 @@ class RoleServiceImplTest {
         final Role roleToSave = new Role("UNAUTHORIZED");
         final Role savedRole = roleRepository.save(roleToSave);
         assertNotNull(savedRole);
+    }
+
+    @Test
+    void find() {
+        final Role roleToSave = new Role("ADMIN");
+        final Role savedRole = roleRepository.save(roleToSave);
+
+        Role role = roleRepository.findByRole(String.valueOf(RolesEnum.ADMIN));
+        assertNotNull(role);
+        assertEquals(role.getRole(), savedRole.getRole());
     }
 }
