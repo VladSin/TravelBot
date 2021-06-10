@@ -23,7 +23,7 @@ public class UserRestController {
         this.userService = userService;
     }
 
-    @PutMapping(value = "save")
+    @PostMapping(value = "save")
     public ResponseEntity<UserResponseDto> saveUser(@RequestBody UserRequestDto request) {
         UserEntity user = new UserEntity();
         user.setUsername(request.getUsername());

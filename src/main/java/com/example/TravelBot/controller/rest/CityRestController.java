@@ -22,7 +22,7 @@ public class CityRestController {
         this.cityService = cityService;
     }
 
-    @PutMapping(value = "save")
+    @PostMapping(value = "save")
     public ResponseEntity<CityResponseDto> saveCity(@RequestBody CityRequestDto request) {
         CityEntity city = new CityEntity();
         city.setName(request.getName());
@@ -53,12 +53,12 @@ public class CityRestController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("/get/all")
+    @GetMapping("get/all")
     public ResponseEntity<List<CityEntity>> cities() {
         return new ResponseEntity<>(cityService.getAll(), HttpStatus.OK);
     }
 
-    @PatchMapping(value = "/update/name/{id}")
+    @PatchMapping(value = "update/name/{id}")
     public ResponseEntity<CityResponseDto> updateCityName(
             @PathVariable("id") Long id,
             @RequestBody String name) {
@@ -72,7 +72,7 @@ public class CityRestController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @PatchMapping(value = "/update/info/{id}")
+    @PatchMapping(value = "update/info/{id}/")
     public ResponseEntity<CityResponseDto> updateCityInformation(
             @PathVariable("id") Long id,
             @RequestBody String info) {
@@ -87,7 +87,7 @@ public class CityRestController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "{id}")
     public void deleteCity(@PathVariable("id") Long id) {
         cityService.delete(id);
     }
