@@ -65,12 +65,12 @@ public class UserRestController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("/get/all")
+    @GetMapping("get/all")
     public ResponseEntity<List<UserEntity>> users() {
         return new ResponseEntity<>(userService.getAll(), HttpStatus.OK);
     }
 
-    @PatchMapping(value = "/update/name/{id}")
+    @PatchMapping(value = "update/name/{id}")
     public ResponseEntity<UserResponseDto> updateUserName(
             @PathVariable("id") Long id,
             @RequestBody UserRequestDto request) {
@@ -84,7 +84,7 @@ public class UserRestController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @PatchMapping(value = "/update/password/{id}")
+    @PatchMapping(value = "update/password/{id}")
     public ResponseEntity<UserResponseDto> updateUserPassword(
             @PathVariable("id") Long id,
             @RequestBody UserRequestDto request) {
@@ -98,7 +98,7 @@ public class UserRestController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @PatchMapping(value = "/update/email/{id}")
+    @PatchMapping(value = "update/email/{id}")
     public ResponseEntity<UserResponseDto> updateUserEmail(
             @PathVariable("id") Long id,
             @RequestBody UserRequestDto request) {
@@ -113,7 +113,7 @@ public class UserRestController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "delete/{id}")
     public void deleteUser(@PathVariable("id") Long id) {
         userService.delete(id);
     }

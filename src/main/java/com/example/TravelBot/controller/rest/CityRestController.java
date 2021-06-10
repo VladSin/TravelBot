@@ -87,7 +87,7 @@ public class CityRestController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping(value = "{id}")
+    @DeleteMapping(value = "delete/{id}")
     public void deleteCity(@PathVariable("id") Long id) {
         cityService.delete(id);
     }
