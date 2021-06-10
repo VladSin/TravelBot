@@ -11,25 +11,24 @@ import org.telegram.telegrambots.TelegramBotsApi;
 
 import javax.annotation.PostConstruct;
 
-@Controller
 @SpringBootApplication
 public class TravelBotApplication {
 
-    @RequestMapping("/")
-    @ResponseBody
-    String home() {
-        return "Hello World!";
-    }
-
-    @Bean
-    public TelegramBotsApi telegramBotsApi() {
-        return new TelegramBotsApi();
-    }
-
-    @PostConstruct
-    public void init() {
-        ApiContextInitializer.init();
-    }
+//    @RequestMapping("/")
+//    @ResponseBody
+//    String home() {
+//        return "Hello World!";
+//    }
+//
+//    @Bean
+//    public TelegramBotsApi telegramBotsApi() {
+//        return new TelegramBotsApi();
+//    }
+//
+//    @PostConstruct
+//    public void init() {
+//        ApiContextInitializer.init();
+//    }
 
     public static void main(String[] args) {
         SpringApplication.run(TravelBotApplication.class, args);
