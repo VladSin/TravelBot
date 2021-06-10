@@ -58,10 +58,10 @@ public class CityRestController {
         return new ResponseEntity<>(cityService.getAll(), HttpStatus.OK);
     }
 
-    @PatchMapping(value = "update/name/{id}")
+    @PatchMapping(value = "update/name/{id}/{name}")
     public ResponseEntity<CityResponseDto> updateCityName(
             @PathVariable("id") Long id,
-            @RequestBody String name) {
+            @PathVariable("name") String name) {
 
         if (cityService.findById(id) == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
