@@ -72,27 +72,39 @@ public class BotConfig extends TelegramLongPollingBot {
         SendMessage sendMessage;
         String send = "";
 
-        if (message.equals("/start") || message.equals("/Start")) {
-            send = "Welcome!!! \nI'll help you find the best places to visit! \nEnter city name:";
-            sendMessage = createMessage(send, chatId, messageId);
-        } else if (message.equals("/help") || message.equals("/Help")){
-            send = "If you have any questions, please write me: Vladsinitsa23@gmail.com";
-            sendMessage = createMessage(send, chatId, messageId);
-        } else if (message.equals("/list") || message.equals("/List")){
-            List<CityEntity> citiesMeaning = cityService.getAll();
-            if (!citiesMeaning.isEmpty()) {
-                List<String> citiesName = citiesMeaning.stream().map(CityEntity::getName).collect(Collectors.toList());
-                send = "I know cities like:";
-                sendMessage = createMessage(send, chatId, messageId, setInline(citiesName));
-            } else {
-                send = "I don't know the city yet. Sorry!((";
+        switch (message) {
+            case "/start":
+            case "/Start":
+                send = "Welcome!!! \nI'll help you find the best places to visit! \nEnter city name:";
                 sendMessage = createMessage(send, chatId, messageId);
-            }
-        } else {
-            CityEntity cityEntity = cityService.findByName(message);
-            send = "I have no information about this city... Sorry!((\n" +
-                    "Maybe it'll help you: https://www.google.by/search?q=" + cityEntity.getName();
-            sendMessage = createMessage(send, chatId, messageId);
+                break;
+            case "/help":
+            case "/Help":
+                send = "If you have any questions, please write me: Vladsinitsa23@gmail.com";
+                sendMessage = createMessage(send, chatId, messageId);
+                break;
+            case "/list":
+            case "/List":
+                List<CityEntity> citiesMeaning = cityService.getAll();
+                if (!citiesMeaning.isEmpty()) {
+                    List<String> citiesName = citiesMeaning.stream().map(CityEntity::getName).collect(Collectors.toList());
+                    send = "I know cities like:";
+                    sendMessage = createMessage(send, chatId, messageId, setInline(citiesName));
+                } else {
+                    send = "I don't know the cities yet. Sorry!((";
+                    sendMessage = createMessage(send, chatId, messageId);
+                }
+                break;
+            default:
+                CityEntity cityEntity = cityService.findByName(message);
+                if (cityEntity.getInfo() != null) {
+                    send = String.join(".\n", cityEntity.getInfo());
+                } else {
+                    send = "I have no information about this city... Sorry!((\n" +
+                            "Maybe it'll help you: https://www.google.by/search?q=" + cityEntity.getName();
+                }
+                sendMessage = createMessage(send, chatId, messageId);
+                break;
         }
 
         try {
