@@ -75,13 +75,17 @@ public class BotConfig extends TelegramLongPollingBot {
         if (message.equals("/start") || message.equals("/Start")) {
             send = "Welcome!!! \nI'll help you find the best places to visit! \nEnter city name:";
             sendMessage = createMessage(send, chatId, messageId);
+        } else if (message.equals("/help") || message.equals("/Help")){
+            send = "If you have any questions, please write me: Vladsinitsa23@gmail.com";
+            sendMessage = createMessage(send, chatId, messageId);
         } else {
             CityEntity cityEntity = cityService.findByName(message);
             if (cityEntity.getInfo() != null) {
                 if (!cityEntity.getInfo().isEmpty()) {
                     send = String.join(".\n", cityEntity.getInfo());
                 } else {
-                    send = "I have no information about this city... Sorry!((";
+                    send = "I have no information about this city... Sorry!((\n" +
+                            "Maybe it'll help you: https://www.google.by/search?q=" + cityEntity.getName();
                 }
                 sendMessage = createMessage(send, chatId, messageId);
             } else {
@@ -92,7 +96,8 @@ public class BotConfig extends TelegramLongPollingBot {
                     send = "I don't know this city... Sorry!(( \nChoose another:";
                     sendMessage = createMessage(send, chatId, messageId, setInline(citiesName));
                 } else {
-                    send = "I don't know this city... Sorry!((";
+                    send = "I have no information about this city... Sorry!((\n" +
+                            "Maybe it'll help you: https://www.google.by/search?q=" + cityEntity.getName();
                     sendMessage = createMessage(send, chatId, messageId);
                 }
             }
