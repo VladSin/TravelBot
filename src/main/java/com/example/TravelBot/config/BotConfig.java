@@ -97,11 +97,11 @@ public class BotConfig extends TelegramLongPollingBot {
                 break;
             default:
                 CityEntity cityEntity = cityService.findByName(message);
-                if (cityEntity != null && cityEntity.getInfo() != null) {
+                if (cityEntity.getInfo() != null) {
                     send = String.join(".\n", cityEntity.getInfo());
                 } else {
                     send = "I have no information about this city... Sorry!((\n" +
-                            "Maybe it'll help you: https://www.google.by/search?q=" + cityEntity.getName();
+                            "Maybe it'll help you: https://www.google.by/search?q=" + message;
                 }
                 sendMessage = createMessage(send, chatId, messageId);
                 break;
