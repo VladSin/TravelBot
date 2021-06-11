@@ -1,7 +1,7 @@
 # Telegram Bot Application
 ## Данное Web-приложение предназначено для управления туристическим ботом
 
-* ### Для запуска Вам необходимо лишь написать ему: @TravelInformationBot
+* ### Для запуска Вам необходимо лишь написать ему: http://t.me/TravelInformationBot
 * ### Документация по приложению: https://travel-info-bot.herokuapp.com/swagger-ui.html
 * ### По вопросам обращайтесь: Vladsititsa23@gmail.com или https://t.me/VladislavSinitsa
 
