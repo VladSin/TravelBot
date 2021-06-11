@@ -2,8 +2,8 @@
 ## Данное Web-приложение предназначено для управления туристическим ботом
 
 * ### Для запуска Вам необходимо лишь написать ему: @TravelInformationBot
-* ### Корневая ссылка к приложению: https://travel-info-bot.herokuapp.com
 * ### Документация по приложению: https://travel-info-bot.herokuapp.com/swagger-ui.html
+* ### По вопросам обращайтесь: Vladsititsa23@gmail.com или https://t.me/VladislavSinitsa
 
 ## Что реализовано:
 *	Приложение размещено на платформе Heroky (https://www.heroku.com/)
