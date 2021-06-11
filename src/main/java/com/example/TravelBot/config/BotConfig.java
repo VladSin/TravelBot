@@ -1,6 +1,7 @@
 package com.example.TravelBot.config;
 
 import com.example.TravelBot.entity.CityEntity;
+import com.example.TravelBot.exeption.CityNotFoundException;
 import com.example.TravelBot.service.CityService;
 import lombok.Getter;
 import lombok.Setter;
@@ -96,15 +97,18 @@ public class BotConfig extends TelegramLongPollingBot {
                 }
                 break;
             default:
-                CityEntity cityEntity = cityService.findByName(message);
-                if (cityEntity.getInfo() != null) {
-                    send = String.join(".\n", cityEntity.getInfo() + ".\n" +
-                            "More information about this city: ttps://www.google.by/search?q=" + message);
-                } else {
+                try {
+                    CityEntity cityEntity = cityService.findByName(message);
+                    if (cityEntity.getInfo() != null) {
+                        send = String.join(".\n", cityEntity.getInfo() + ".\n" +
+                                "More information about this city: https://www.google.by/search?q=" + message);
+                    }
+                    sendMessage = createMessage(send, chatId, messageId);
+                } catch (CityNotFoundException e){
                     send = "I have no information about this city... Sorry!((\n" +
                             "Maybe it'll help you: https://www.google.by/search?q=" + message;
+                    sendMessage = createMessage(send, chatId, messageId);
                 }
-                sendMessage = createMessage(send, chatId, messageId);
                 break;
         }
 
