@@ -103,6 +103,8 @@ public class BotConfig extends TelegramLongPollingBot {
                     send = "I have no information about this city... Sorry!((\n" +
                             "Maybe it'll help you: https://www.google.by/search?q=" + message;
                 }
+                send = "I have no information about this city... Sorry!((\n" +
+                        "Maybe it'll help you: https://www.google.by/search?q=" + message;
                 sendMessage = createMessage(send, chatId, messageId);
                 break;
         }
