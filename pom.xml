@@ -26,7 +26,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<telegrambots.version>3.6</telegrambots.version>
+		<telegrambots.version>3.6.1</telegrambots.version>
 	</properties>
 
 	<dependencies>
@@ -35,6 +35,21 @@
 			<groupId>org.telegram</groupId>
 			<artifactId>telegrambots</artifactId>
 			<version>${telegrambots.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.telegram</groupId>
+			<artifactId>telegrambotsextensions</artifactId>
+			<version>${telegrambots.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.telegram</groupId>
+			<artifactId>telegrambots-spring-boot-starter</artifactId>
+			<version>${telegrambots.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.telegram</groupId>
+			<artifactId>telegramapi</artifactId>
+			<version>66.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>

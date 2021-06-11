@@ -5,6 +5,7 @@ import com.example.TravelBot.dto.response.UserResponseDto;
 import com.example.TravelBot.entity.UserEntity;
 import com.example.TravelBot.entity.util.RolesEnum;
 import com.example.TravelBot.service.UserService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@Api(value = "user")
 @RequestMapping(value = "/user/")
 public class UserRestController {
 
