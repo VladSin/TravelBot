@@ -73,16 +73,15 @@ public class BotConfig extends TelegramLongPollingBot {
         String send = "";
 
         if (message.equals("/start") || message.equals("/Start")) {
-            send = "Добро пожаловать! \nТуристический помощник подскажет Вам лучшие места для посещения. \nВведите название города:";
+            send = "Welcome!!! \nI'll help you find the best places to visit! \nEnter city name:";
             sendMessage = createMessage(send, chatId, messageId);
         } else {
-            String cityInfo = cityService.findByName(message).getInfo();
-
-            if (cityInfo != null) {
-                if (!cityInfo.isEmpty()) {
-                    send = String.join(".\n", cityInfo);
+            CityEntity cityEntity = cityService.findByName(message);
+            if (cityEntity.getInfo() != null) {
+                if (!cityEntity.getInfo().isEmpty()) {
+                    send = String.join(".\n", cityEntity.getInfo());
                 } else {
-                    send = "В этом городе смотреть нечего. Езжай отсюда.";
+                    send = "I have no information about this city... Sorry!((";
                 }
                 sendMessage = createMessage(send, chatId, messageId);
             } else {
@@ -90,10 +89,10 @@ public class BotConfig extends TelegramLongPollingBot {
                 if (!citiesMeaning.isEmpty()) {
                     List<String> citiesName = citiesMeaning.stream()
                             .map(CityEntity::getName).collect(Collectors.toList());
-                    send = "Возможно вы не правильно ввели название города.\nВыберете подходящий:";
+                    send = "I don't know this city... Sorry!(( \nChoose another:";
                     sendMessage = createMessage(send, chatId, messageId, setInline(citiesName));
                 } else {
-                    send = "У нас в базе нет информации о таком городе.";
+                    send = "I don't know this city... Sorry!((";
                     sendMessage = createMessage(send, chatId, messageId);
                 }
             }
